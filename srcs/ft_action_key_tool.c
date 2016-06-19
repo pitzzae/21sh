@@ -27,21 +27,23 @@ void			get_sigint(int sig)
 {
 	t_dat *t_d;
 
-	(void)sig;
-	t_d = ft_init_prompt(NULL, 0);
-	t_d->max_x = t_d->vmax_x;
-	ft_move_end(t_d);
-	ft_putstr("\r\n");
-	t_d->prompt = t_d->init_p;
-	ft_putstr(t_d->prompt);
-	free(t_d->cmd);
-	t_d->cmd = ft_strnew(0);
-	ft_bzero(t_d->cmd, 1);
-	t_d->pos_x = 0;
-	t_d->max_x = 0;
-	t_d->vmax_x = 0;
-	t_d->pos_y = 1;
-	t_d->max_y = 1;
+	if (sig != 2)
+	{
+		t_d = ft_init_prompt(NULL, 0);
+		t_d->max_x = t_d->vmax_x;
+		ft_move_end(t_d);
+		ft_putstr("\r\n");
+		t_d->prompt = t_d->init_p;
+		ft_putstr(t_d->prompt);
+		free(t_d->cmd);
+		t_d->cmd = ft_strnew(0);
+		ft_bzero(t_d->cmd, 1);
+		t_d->pos_x = 0;
+		t_d->max_x = 0;
+		t_d->vmax_x = 0;
+		t_d->pos_y = 1;
+		t_d->max_y = 1;
+	}
 }
 
 void			ft_init_struct(t_dat *t_d, char *prompt)

@@ -34,13 +34,19 @@ int				ft_close_cursh(t_dat *t_d, int i)
 {
 	int		pos;
 	int		len;
+	int		nlen;
 
 	len = 0;
 	t_d->prompt = "cursh>";
 	pos = ft_openclose(t_d->cmd, '{', '}');
+	while (t_d->cmd[i] && t_d->cmd[i] != '<' && t_d->cmd[i] != '>' &&
+		t_d->cmd[i] != '&' && t_d->cmd[i] != '|')
+		i++;
 	while (pos != 0 && ft_strcmp(t_d->prompt, "cursh>") == 0)
 	{
-		ft_complet_cmd(t_d, i);
+		nlen = ft_strlen(t_d->cmd);
+		ft_complet_cmd(t_d, i + 1);
+		i += ft_strlen(t_d->cmd) - nlen;
 		pos = ft_openclose(t_d->cmd, '{', '}');
 		len++;
 	}
@@ -51,13 +57,19 @@ int				ft_close_parent(t_dat *t_d, int i)
 {
 	int		pos;
 	int		len;
+	int		nlen;
 
 	len = 0;
 	t_d->prompt = "parent>";
 	pos = ft_openclose(t_d->cmd, '(', ')');
+	while (t_d->cmd[i] && t_d->cmd[i] != '<' && t_d->cmd[i] != '>' &&
+		t_d->cmd[i] != '&' && t_d->cmd[i] != '|')
+		i++;
 	while (pos != 0 && ft_strcmp(t_d->prompt, "parent>") == 0)
 	{
-		ft_complet_cmd(t_d, i);
+		nlen = ft_strlen(t_d->cmd);
+		ft_complet_cmd(t_d, i + 1);
+		i += ft_strlen(t_d->cmd) - nlen;
 		pos = ft_openclose(t_d->cmd, '(', ')');
 		len++;
 	}
@@ -68,13 +80,19 @@ int				ft_close_bracket(t_dat *t_d, int i)
 {
 	int		pos;
 	int		len;
+	int		nlen;
 
 	len = 0;
 	t_d->prompt = "bracket>";
 	pos = ft_openclose(t_d->cmd, '[', ']');
+	while (t_d->cmd[i] && t_d->cmd[i] != '<' && t_d->cmd[i] != '>' &&
+		t_d->cmd[i] != '&' && t_d->cmd[i] != '|')
+		i++;
 	while (pos != 0 && ft_strcmp(t_d->prompt, "bracket>") == 0)
 	{
-		ft_complet_cmd(t_d, i);
+		nlen = ft_strlen(t_d->cmd);
+		ft_complet_cmd(t_d, i + 1);
+		i += ft_strlen(t_d->cmd) - nlen;
 		pos = ft_openclose(t_d->cmd, '[', ']');
 		len++;
 	}

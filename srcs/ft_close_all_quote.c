@@ -16,15 +16,21 @@ static int		ft_close_bquote(t_dat *t_d, int i)
 {
 	char		*tmp_cmd;
 	int			len;
+	int			nlen;
 
 	len = 0;
+	while (t_d->cmd[i] && t_d->cmd[i] != '<' && t_d->cmd[i] != '>' &&
+		t_d->cmd[i] != '&' && t_d->cmd[i] != '|')
+		i++;
 	if (ft_strocur_slash(t_d->cmd, '`') % 2 != 0)
 	{
 		t_d->prompt = "bquote>";
 		while (ft_strocur_slash(t_d->cmd, '`') % 2 != 0 &&
 			ft_strcmp(t_d->prompt, "bquote>") == 0)
 		{
+			nlen = ft_strlen(t_d->cmd);
 			ft_complet_cmd(t_d, i);
+			i += ft_strlen(t_d->cmd) - nlen;
 			ft_stradd_slash(&t_d->cmd, '\'');
 			ft_stradd_slash(&t_d->cmd, '"');
 			len++;
@@ -37,15 +43,21 @@ static int		ft_close_dquote(t_dat *t_d, int i)
 {
 	char		*tmp_cmd;
 	int			len;
+	int			nlen;
 
 	len = 0;
+	while (t_d->cmd[i] && t_d->cmd[i] != '<' && t_d->cmd[i] != '>' &&
+		t_d->cmd[i] != '&' && t_d->cmd[i] != '|')
+		i++;
 	if (ft_strocur_slash(t_d->cmd, '"') % 2 != 0)
 	{
 		t_d->prompt = "dquote>";
 		while (ft_strocur_slash(t_d->cmd, '"') % 2 != 0 &&
 			ft_strcmp(t_d->prompt, "dquote>") == 0)
 		{
+			nlen = ft_strlen(t_d->cmd);
 			ft_complet_cmd(t_d, i);
+			i += ft_strlen(t_d->cmd) - nlen;
 			ft_stradd_slash(&t_d->cmd, '`');
 			ft_stradd_slash(&t_d->cmd, '\'');
 			len++;
@@ -58,13 +70,19 @@ static int		ft_close_quote(t_dat *t_d, int i)
 {
 	char		*tmp_cmd;
 	int			len;
+	int			nlen;
 
 	len = 0;
+	while (t_d->cmd[i] && t_d->cmd[i] != '<' && t_d->cmd[i] != '>' &&
+		t_d->cmd[i] != '&' && t_d->cmd[i] != '|')
+		i++;
 	t_d->prompt = "quote>";
 	while (ft_strocur_slash(t_d->cmd, '\'') % 2 != 0 &&
 		ft_strcmp(t_d->prompt, "quote>") == 0)
 	{
+		nlen = ft_strlen(t_d->cmd);
 		ft_complet_cmd(t_d, i);
+		i += ft_strlen(t_d->cmd) - nlen;
 		ft_stradd_slash(&t_d->cmd, '`');
 		ft_stradd_slash(&t_d->cmd, '"');
 		len++;

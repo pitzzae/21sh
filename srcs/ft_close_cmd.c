@@ -36,7 +36,6 @@ void			ft_complet_cmd(t_dat *t_d, int i)
 	else
 		end = ft_strdup("");
 	start = ft_strsub_free(t_d->cmd, 0, i, 1);
-	start = ft_strjoin_free(start, "\n", 1);
 	ft_init_struct(t_d, t_d->prompt);
 	if (get_action_key(t_d) == -1)
 	{

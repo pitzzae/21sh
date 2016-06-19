@@ -50,15 +50,23 @@ void			ft_init_history(t_dat *t_d)
 		t_d->init_p = ft_strdup("$>");
 }
 
-void			ft_add_history(t_dat *t_d)
+void			ft_add_history(t_dat *t_d, char *cmd, int i)
 {
 	t_list		*lst;
+	char		*cmd_c;
 
-	lst = ft_lstnew(t_d->cmd, ft_strlen(t_d->cmd) + 1);
-	lst->select = t_d->vmax_x;
-	ft_lstaddend_free(&t_d->hist, lst, u_del);
-	t_d->h_len = ft_lstlen(t_d->hist);
-	t_d->h_pos = t_d->h_len;
+	if (i > 0)
+	{
+		
+		cmd_c = ft_str_replace_str(cmd, "\n", "");
+		lst = ft_lstnew(cmd_c, ft_strlen(cmd_c) + 1);
+		lst->select = t_d->vmax_x;
+		ft_lstaddend_free(&t_d->hist, lst, u_del);
+		t_d->h_len = ft_lstlen(t_d->hist);
+		t_d->h_pos = t_d->h_len;
+		free(cmd_c);
+	}
+	free(cmd);
 }
 
 void			ft_history_top(t_dat *t_d)

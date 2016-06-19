@@ -15,28 +15,28 @@
 void			ft_send_ad_multiple(t_dat *t_d)
 {
 	char		**list_cmd;
+	char		*cmd;
 	int			i[2];
 
 	i[0] = 0;
 	i[1] = 0;
 	ft_close_cmd(t_d, 0);
+	cmd = ft_strdup(t_d->cmd);
 	list_cmd = ft_strsplit(t_d->cmd, ';');
 	while (list_cmd[i[0]] != 0)
 	{
 		if (ft_strocur(list_cmd[i[0]], ' ') != ft_strlen(list_cmd[i[0]]))
 		{
 			free(t_d->cmd);
-			t_d->cmd = list_cmd[i[0]];
+			t_d->cmd = list_cmd[i[0]++];
 			ft_select_type(t_d);
 			free(t_d->argv);
 			i[1]++;
 		}
 		else
-			free(list_cmd[i[0]]);
-		i[0]++;
+			free(list_cmd[i[0]++]);
 	}
-	if (i[1] > 0)
-		ft_add_history(t_d);
+	ft_add_history(t_d, cmd, i[1]);
 	free(list_cmd);
 }
 

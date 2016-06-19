@@ -127,7 +127,7 @@ int				ft_reset_termios(t_dat *t_d);
 void			get_sigint(int sig);
 void			ft_init_struct(t_dat *t_d, char *prompt);
 void			ft_init_history(t_dat *t_d);
-void			ft_add_history(t_dat *t_d);
+void			ft_add_history(t_dat *t_d, char *cmd, int i);
 void			ft_history_top(t_dat *t_d);
 void			ft_history_bot(t_dat *t_d);
 int				ft_initshell(t_dat *t_d, char *prompt);
